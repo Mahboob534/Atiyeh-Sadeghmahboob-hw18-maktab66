@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SignupForm from "./Components/SignupForm";
 import Login from "./Components/Login";
 import UserProvider from "./Context/UserContext";
-import SuccessfulLogin from './Components/SuccessfulLogin'
+
 function App() {
   return (
     <div className="containerTab">
@@ -29,7 +29,7 @@ function App() {
               <Tab.Pane eventKey="first">
                 <UserProvider>
                   <Login />
-                  {/* <SuccessfulLogin/> */}
+                 
                 </UserProvider>
               </Tab.Pane>
               <Tab.Pane eventKey="second">

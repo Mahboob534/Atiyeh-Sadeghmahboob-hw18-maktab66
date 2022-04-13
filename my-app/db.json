@@ -21,6 +21,17 @@
       "provinceOfBirth": "كرمانشاه",
       "cityOfBirth": "جوانرود",
       "id": 2
+    },
+    {
+      "fname": "صابر",
+      "lname": "صادق محبوب ",
+      "email": "saber@gmail.com",
+      "password": "123456",
+      "education": "4",
+      "educationPlace": "فارس",
+      "provinceOfBirth": "فارس",
+      "cityOfBirth": "اردكان",
+      "id": 3
     }
   ]
 }
