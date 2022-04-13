@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "fname": "fff",
+      "lname": "ffffoooo",
+      "email": "mahboob6103@gmail.com",
+      "password": "12345",
+      "education": "4",
+      "educationPlace": "خوزستان",
+      "provinceOfBirth": "سمنان",
+      "cityOfBirth": "شاهرود",
+      "id": 1
+    },
+    {
+      "fname": "آتیه",
+      "lname": "صادق محبوب",
+      "email": "sadegh@gamil.com",
+      "password": "123456",
+      "education": "4",
+      "educationPlace": "گيلان",
+      "provinceOfBirth": "كرمانشاه",
+      "cityOfBirth": "جوانرود",
+      "id": 2
+    }
+  ]
+}
