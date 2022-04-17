@@ -1,9 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,memo } from "react";
 import { useFormik } from "formik";
-import axios from "axios";
 import HocCheckedLogin from "./HocCheckedLogin";
+import axios from "axios";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+const validate = (values) => {
+  const errors = {};
+  if (!values.email) {
+    errors.email = "فیلد پست الکترونیکی  را نمی تواند خالی باشد";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "maktab@... .com";
+  }
+  if (!values.password) {
+    errors.password = "پسورد نمی تواند خالی باشد";
+  }
+ 
+  return errors;
+};
 
-const Login = ({ user, setUser, isLogIn, setIsLogIn }) => {
+const Login = ({setUser, setIsLogIn,iconEye,
+  passwordVisibility,
+  handlePasswordVisibility}) => {
   const [userInfo, setUserInfo] = useState("");
   useEffect(() => {
     axios
@@ -16,6 +32,7 @@ const Login = ({ user, setUser, isLogIn, setIsLogIn }) => {
       email: "",
       password: "",
     },
+    validate ,
     onSubmit: (values) => {
       userInfo.map((item) => {
         if (values.email == item.email && values.password == item.password) {
@@ -39,21 +56,34 @@ const Login = ({ user, setUser, isLogIn, setIsLogIn }) => {
               value={formik.values.email}
             />
             <label htmlFor="email">*پست الکترونیکی</label>
-            {/* {formik.touched.email && formik.errors.email ? (
+             {formik.touched.email && formik.errors.email ? (
           <p className="error">{formik.errors.email}</p>
-        ) : null} */}
+        ) : null} 
           </div>
           <div className="field">
             <input
               name="password"
-              type="password"
+              type={passwordVisibility ? "password": "text"}
               onChange={formik.handleChange}
               value={formik.values.password}
             />
             <label htmlFor="password">پسورد*</label>
-            {/* {formik.touched.password && formik.errors.password ? (
+            <span>{iconEye == "eye" ? (
+            <FaRegEye
+              icon={["fa", "FaRegEye"]}
+              onClick={handlePasswordVisibility}
+            />
+          ) : (
+            <FaRegEyeSlash
+              icon={["fa", "FaRegEye"]}
+              onClick={handlePasswordVisibility}
+            />
+          )}</span>
+
+
+            {formik.touched.password && formik.errors.password ? (
           <p className="error">{formik.errors.password}</p>
-        ) : null} */}
+        ) : null} 
           </div>
           <button type="submit">ورود</button>
         </form>
@@ -62,4 +92,4 @@ const Login = ({ user, setUser, isLogIn, setIsLogIn }) => {
   );
 };
 
-export default HocCheckedLogin(Login);
+export default HocCheckedLogin(memo(Login));

@@ -138,6 +138,20 @@ button:disabled {
         padding: 30;
         margin-right: 35%;
 }
+
+
+span{
+  color: #65657b;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  left: 20px;
+  line-height: 14px;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 20px;
+  z-index: 2;
+}
 /* 
 .lds-ellipsis {
   display: inline-block;

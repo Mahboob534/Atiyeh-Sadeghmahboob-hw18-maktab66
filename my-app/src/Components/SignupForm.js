@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import { useFormik } from "formik";
+import HocCheckedLogin from "./HocCheckedLogin";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const validate = (values) => {
   const errors = {};
@@ -22,7 +24,7 @@ const validate = (values) => {
   if (!values.password) {
     errors.password = "پسورد نمی تواند خالی باشد";
   }
-  if (!values.educationPlace) {
+  if (!values.educationPlace && values.education) {
     errors.educationPlace = "محل تحصیل نمی تواند خالی باشد";
   }
   if (!values.provinceOfBirth) {
@@ -34,7 +36,9 @@ const validate = (values) => {
   return errors;
 };
 
-const SignupForm = () => {
+const SignupForm = ({iconEye,
+  passwordVisibility,
+  handlePasswordVisibility}) => {
   const [data, setData] = useState({});
   
 
@@ -45,7 +49,7 @@ const SignupForm = () => {
       .catch((err) => alert(err))
       
   }, []);
-  //console.log(data);
+  
 
   const formik = useFormik({
     initialValues: {
@@ -111,11 +115,26 @@ const SignupForm = () => {
         <input
           id="password"
           name="password"
-          type="password"
+          type={passwordVisibility ? "password": "text"}
           onChange={formik.handleChange}
           value={formik.values.password}
+         
         />
+        
         <label htmlFor="password">پسورد*</label>
+        <span>{iconEye == "eye" ? (
+            <FaRegEye
+              icon={["fa", "FaRegEye"]}
+              onClick={handlePasswordVisibility}
+            />
+          ) : (
+            <FaRegEyeSlash
+              icon={["fa", "FaRegEye"]}
+              onClick={handlePasswordVisibility}
+            />
+          )}</span>
+        
+
         {formik.touched.password && formik.errors.password ? (
           <p className="error">{formik.errors.password}</p>
         ) : null}
@@ -232,6 +251,6 @@ const SignupForm = () => {
   );
 };
 //const Search=HocJson(SignupForm,"users");
-export default SignupForm;
+export default HocCheckedLogin(SignupForm);
 
 // https://stackoverflow.com/questions/70413214/problem-with-select-field-in-formik-when-onchange-option-given
